@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pdftable.models.ParsedTablePage;
 
-import java.io.File;
+import java.io.InputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,6 +24,11 @@ import java.util.stream.IntStream;
 
 
 public class PdfTableReaderTest {
+
+    static {
+        nu.pattern.OpenCV.loadShared();
+        System.loadLibrary(org.opencv.core.Core.NATIVE_LIBRARY_NAME);
+    }
 
     private static final Path TEST_OUT_PATH = Paths.get("C:", "pdf_tests");
     private static final String TEST_FILENAME = "test_tables.pdf";
@@ -51,8 +56,8 @@ public class PdfTableReaderTest {
     private PDDocument getTestPDF() {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource(TEST_FILENAME).getFile());
-            return PDDocument.load(file);
+            InputStream is = classLoader.getResourceAsStream(TEST_FILENAME);
+            return PDDocument.load(is);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e.getCause());

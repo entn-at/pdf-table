@@ -16,13 +16,13 @@ public class PdfTableSettings {
 
         // DPI SETTINGS
         private static final int DEFAULT_PDF_DPI = 72;
-        private int pdfRenderingDpi = 120;
+        private int pdfRenderingDpi = 300;
 
         // CANNY EDGE DETECTION FLAG
         private boolean cannyFiltering = false;
 
         // BINARY INVERTED THRESHOLD SETTINGS
-        private double bitThreshold = 150;
+        private double bitThreshold = 100;
         private double bitMaxVal = 255;
 
         // CANNY FILTER SETTINGS
